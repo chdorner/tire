@@ -77,6 +77,12 @@ module Tire
         self
       end
 
+      def group_field(field)
+        @group_field = field
+        @options[:group_field] = field
+        self
+      end
+
       def perform
         @response = Configuration.client.get(self.url, self.to_json)
         if @response.failure?
@@ -105,6 +111,7 @@ module Tire
         request.update( { :size => @size } )               if @size
         request.update( { :from => @from } )               if @from
         request.update( { :fields => @fields } )           if @fields
+        request.update( { :groupField => @group_field } )  if @group_field
         request
       end
 

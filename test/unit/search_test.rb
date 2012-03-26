@@ -367,6 +367,26 @@ module Tire
 
       end
 
+      context "group_field" do
+
+        should "set the values in request" do
+          s = Search::Search.new('index') do
+            group_field 'title'
+          end
+          hash = MultiJson.decode( s.to_json )
+          assert_equal 'title', hash['groupField']
+        end
+
+        should "set the size value in options" do
+          s = Search::Search.new('index') do
+            group_field 'title'
+          end
+
+          assert_equal 'title', s.options[:group_field]
+        end
+
+      end
+
     end
 
   end
