@@ -377,6 +377,17 @@ module Tire
           assert_equal 'title', hash['groupField']
         end
 
+        should "set the groupField right after query" do
+          s = Search::Search.new('index') do
+            query { string "*" }
+            sort { by :title, 'desc' }.
+            group_field 'title'
+          end
+          hash = MultiJson.decode( s.to_json )
+          query_index = hash.keys.index('query')
+          assert_equal 'groupField', hash.keys[query_index+1]
+        end
+
         should "set the size value in options" do
           s = Search::Search.new('index') do
             group_field 'title'
