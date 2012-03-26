@@ -103,6 +103,7 @@ module Tire
       def to_hash
         request = {}
         request.update( { :query  => @query.to_hash } )    if @query
+        request.update( { :groupField => @group_field } )  if @group_field
         request.update( { :sort   => @sort.to_ary   } )    if @sort
         request.update( { :facets => @facets.to_hash } )   if @facets
         request.update( { :filter => @filters.first.to_hash } ) if @filters && @filters.size == 1
@@ -111,7 +112,6 @@ module Tire
         request.update( { :size => @size } )               if @size
         request.update( { :from => @from } )               if @from
         request.update( { :fields => @fields } )           if @fields
-        request.update( { :groupField => @group_field } )  if @group_field
         request
       end
 
