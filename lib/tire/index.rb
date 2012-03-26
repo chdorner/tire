@@ -154,7 +154,7 @@ module Tire
       else
         return nil if h['exists'] == false
         document = h['_source'] || h['fields'] || {}
-        document.update('id' => h['_id'], '_type' => h['_type'], '_index' => h['_index'], '_version' => h['_version'])
+        document.update('id' => h['_id'], '_type' => h['_type'], '_index' => h['_index'], '_version' => h['_version'], '_grouped' => h['_grouped'])
         Configuration.wrapper.new(document)
       end
 
